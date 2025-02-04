@@ -9,6 +9,7 @@ class LearnFlutterPage extends StatefulWidget {
 
 class _LearnFlutterPageState extends State<LearnFlutterPage> {
   bool isSwitch = false;
+  bool? isCheckbox = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,78 +23,99 @@ class _LearnFlutterPageState extends State<LearnFlutterPage> {
           },
           icon: const Icon(Icons.arrow_back),
         ),
-      ),
-      body: Column(
-        children: [
-          Image.asset("images/einstein.jpg"),
-          const SizedBox(
-            height: 10,
+        actions: [
+          IconButton(
+            onPressed: () {
+              debugPrint("Actions");
+            },
+            icon: const Icon(
+              Icons.info_outline,
+            ),
           ),
-          const Divider(),
-          Container(
-            margin: const EdgeInsets.all(10.0),
-            padding: const EdgeInsets.all(10.0),
-            color: Colors.blueGrey,
-            width: double.infinity,
-            child: const Center(
-              child: Text(
-                "This is a Text-Widget",
-                style: TextStyle(
-                  color: Colors.white,
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset("images/einstein.jpg"),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
+              color: Colors.blueGrey,
+              width: double.infinity,
+              child: const Center(
+                child: Text(
+                  "This is a Text-Widget",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: isSwitch ? Colors.green : Colors.blue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: isSwitch ? Colors.green : Colors.blue,
+              ),
+              onPressed: () {
+                debugPrint("Elevated Button");
+              },
+              child: Text("Elevated Button"),
             ),
-            onPressed: () {
-              debugPrint("Elevated Button");
-            },
-            child: Text("Elevated Button"),
-          ),
-          OutlinedButton(
-            onPressed: () {
-              debugPrint("Outlined Button");
-            },
-            child: Text("Outlined Button"),
-          ),
-          TextButton(
-            onPressed: () {
-              debugPrint("TextButton Button");
-            },
-            child: Text("TextButton Button"),
-          ),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {
-              debugPrint("This is the Row");
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Icon(
-                  Icons.local_fire_department,
-                  color: Colors.red,
-                ),
-                Text("Row Widget"),
-                Icon(
-                  Icons.local_fire_department,
-                  color: Colors.red,
-                ),
-              ],
+            OutlinedButton(
+              onPressed: () {
+                debugPrint("Outlined Button");
+              },
+              child: Text("Outlined Button"),
             ),
-          ),
-          Switch(
-            value: isSwitch,
-            onChanged: (bool newBool) {
-              setState(() {
-                isSwitch = newBool;
-              });
-            },
-          ),
-        ],
+            TextButton(
+              onPressed: () {
+                debugPrint("TextButton Button");
+              },
+              child: Text("TextButton Button"),
+            ),
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                debugPrint("This is the Row");
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(
+                    Icons.local_fire_department,
+                    color: Colors.red,
+                  ),
+                  Text("Row Widget"),
+                  Icon(
+                    Icons.local_fire_department,
+                    color: Colors.red,
+                  ),
+                ],
+              ),
+            ),
+            Switch(
+              value: isSwitch,
+              onChanged: (bool newBool) {
+                setState(() {
+                  isSwitch = newBool;
+                });
+              },
+            ),
+            Checkbox(
+                value: isCheckbox,
+                onChanged: (bool? newBool) {
+                  setState(() {
+                    isCheckbox = newBool;
+                  });
+                }),
+            Image.network(
+                'https://upload.wikimedia.org/wikipedia/commons/1/16/Einstein_1933.jpg'),
+          ],
+        ),
       ),
     );
   }
